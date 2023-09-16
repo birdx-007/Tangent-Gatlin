@@ -96,7 +96,7 @@ public class GameUIManager : MonoBehaviour
             GameLogicManager.instance.OnPausePanelHide();
         });
     }
-    
+
     public void ShowMaskPanelOnGameOver(int totalKillNumber)
     {
         gameOverPanel.raycastTarget = true;
@@ -117,12 +117,12 @@ public class GameUIManager : MonoBehaviour
                         }
                         else if (graphic.gameObject.CompareTag("UIPressKeyTip"))
                         {
-                            sequence.Append(graphic.DOColor(Color.black, 0.2f));
+                            sequence.Append(graphic.DOColor(Color.black, 0.1f));
                         }
                         else
                         {
                             sequence.Append(graphic.DOColor(Color.black, 1f));
-                            sequence.AppendInterval(1.5f);
+                            sequence.AppendInterval(1f);
                         }
                     }
                     sequence.AppendCallback(() => GameLogicManager.instance.EnableRestartGame());
