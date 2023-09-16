@@ -5,16 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - UINumberCounter
+  - UIPressKeyTip
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - EnemyBullet
+  - Enemy
+  - PlayerBullet
   - 
   - 
   - 
@@ -39,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Player
+    uniqueID: 354341745
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
