@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     private float _inputHorizontal;
     private float _inputVertical;
     private bool _isFacingRight;
-    private bool _isTurningAround;
+    private float _elapsedTimeTurningAround;
+    private Quaternion _turningAroundTargetRotation;
     public bool enableInput = true;
     public bool isAlive = true;
     private void Start()
@@ -40,7 +41,8 @@ public class PlayerController : MonoBehaviour
         _inputHorizontal = 0f;
         _inputVertical = 0f;
         _isFacingRight = true;
-        _isTurningAround = false;
+        _elapsedTimeTurningAround = 0f;
+        _turningAroundTargetRotation = transform.rotation;
     }
 
     private void Update()
@@ -49,15 +51,8 @@ public class PlayerController : MonoBehaviour
         {
             _input.UpdateInputState();
             _inputHorizontal = Input.GetAxis("Horizontal");
-            if (!Mathf.Approximately(_inputHorizontal, 0f))
-            {
-                _isFacingRight = (_inputHorizontal >= 0f) ? true : false;
-                _animator.SetBool("isWalking", true);
-            }
-            else
-            {
-                _animator.SetBool("isWalking", false);
-            }
+            _animator.SetBool("isWalking", !Mathf.Approximately(_inputHorizontal, 0f));
+            _isFacingRight = (_inputHorizontal > 0f) ? true : ((_inputHorizontal < 0f) ? false : _isFacingRight);
 
             _inputVertical = Input.GetAxis("Vertical");
             if (!Mathf.Approximately(_inputVertical, 0f))
@@ -67,18 +62,16 @@ public class PlayerController : MonoBehaviour
 
             //_spriteRenderer.flipX = !_isFacingRight;
             Quaternion targetRotation = Quaternion.FromToRotation(Vector3.right, (_isFacingRight ? 1f : -1f) * Vector3.right);
-            if (_transform.rotation != targetRotation)
+            if (_turningAroundTargetRotation != targetRotation)
             {
-                if (!_isTurningAround)
-                {
-                    _isTurningAround = true;
-                    _transform.DORotateQuaternion(targetRotation, 0.15f);
-                    AudioManager.instance.PlaySoundEffect(SoundEffectType.PlayerTurnAround);
-                }
+                float totalTurningTime = 0.15f;
+                AudioManager.instance.PlaySoundEffect(SoundEffectType.PlayerTurnAround);
+                _transform.DORotateQuaternion(targetRotation, totalTurningTime - _elapsedTimeTurningAround);
+                _turningAroundTargetRotation = targetRotation;
             }
             else
             {
-                _isTurningAround = false;
+                _elapsedTimeTurningAround = 0f;
             }
 
             if (_input.PlayerShootKeyDown)
