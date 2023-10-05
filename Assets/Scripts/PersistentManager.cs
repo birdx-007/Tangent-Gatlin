@@ -34,6 +34,7 @@ public class PersistentManager : MonoBehaviour
     {
         Cursor.visible = false;
         await SceneManager.LoadSceneAsync(menuSceneName, LoadSceneMode.Additive);
+        tempCameraForCurtain.gameObject.SetActive(false);
         AudioManager.instance.PlayBGM(BackgroundMusicType.MainSceneBGM);
         await FadeOutCurtain();
     }
@@ -41,12 +42,10 @@ public class PersistentManager : MonoBehaviour
     private async UniTask FadeInCurtain()
     {
         await curtain.DOFade(1, curtainFadeDuration).AsyncWaitForCompletion().AsUniTask();
-        tempCameraForCurtain.gameObject.SetActive(true);
     }
 
     private async UniTask FadeOutCurtain()
     {
-        tempCameraForCurtain.gameObject.SetActive(false);
         await curtain.DOFade(0, curtainFadeDuration).AsyncWaitForCompletion().AsUniTask();
     }
 
@@ -55,7 +54,8 @@ public class PersistentManager : MonoBehaviour
         await FadeInCurtain();
         AudioManager.instance.PlaySoundEffect(SoundEffectType.UIStart);
 
-        SceneManager.UnloadSceneAsync(menuSceneName).ToUniTask().Forget();
+        await SceneManager.UnloadSceneAsync(menuSceneName);
+        tempCameraForCurtain.gameObject.SetActive(true);
 
         if (GameLogicManager.instance == null)
         {
@@ -64,6 +64,7 @@ public class PersistentManager : MonoBehaviour
         }
 
         await UniTask.WaitUntil(() => GameLogicManager.instance != null);
+        tempCameraForCurtain.gameObject.SetActive(false);
 
         AudioManager.instance.PlayBGM(BackgroundMusicType.QuietBGM);
         await FadeOutCurtain();
@@ -74,12 +75,14 @@ public class PersistentManager : MonoBehaviour
         AudioManager.instance.PlaySoundEffect(SoundEffectType.UIRestart);
         await FadeInCurtain();
         
-        SceneManager.UnloadSceneAsync(gameSceneName).ToUniTask().Forget();
-        
+        await SceneManager.UnloadSceneAsync(gameSceneName);
+        tempCameraForCurtain.gameObject.SetActive(true);
+
         AsyncOperation gameSceneHandle = SceneManager.LoadSceneAsync(gameSceneName, LoadSceneMode.Additive);
         gameSceneHandle.allowSceneActivation = true;
         
         await UniTask.WaitUntil(() => GameLogicManager.instance != null);
+        tempCameraForCurtain.gameObject.SetActive(false);
 
         await FadeOutCurtain();
     }
