@@ -9,7 +9,7 @@ public class EnemyChase_SkyChase : EnemyChaseSOBase
     [SerializeField] private float skyChasingYRandomRange = 1f;
     [SerializeField] private float skyChasingSpeed = 4.5f;
     private float skyChasingTargetY;
-    public override void Initialize(EnemyStateController es)
+    public override void Initialize(EnemyStateMachine es)
     {
         base.Initialize(es);
     }

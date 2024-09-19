@@ -10,7 +10,7 @@ public class EnemyAttack_StraightShoot : EnemyAttackSOBase
     [SerializeField] private float stopShootTimeAfterOutOfAttackRange = 0.25f;
     private float _shootTimer;
     private float _stopShootTimer;
-    public override void Initialize(EnemyStateController stateController)
+    public override void Initialize(EnemyStateMachine stateController)
     {
         base.Initialize(stateController);
     }
@@ -48,11 +48,11 @@ public class EnemyAttack_StraightShoot : EnemyAttackSOBase
             {
                 if (enemy.isProvoked)
                 {
-                    enemyStateController.StateMachine.ChangeState(enemyStateController.ChaseState);
+                    stateMachine.ChangeState(EnemyState.Chase);
                 }
                 else
                 {
-                    enemyStateController.StateMachine.ChangeState(enemyStateController.IdleState);
+                    stateMachine.ChangeState(EnemyState.Idle);
                 }
             }
         }

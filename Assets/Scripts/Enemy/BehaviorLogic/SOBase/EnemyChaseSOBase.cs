@@ -9,7 +9,7 @@ public class EnemyChaseSOBase : EnemyStateSOBase
         base.OnUpdateLogic();
         if (enemy.isPlayerInAttackRange)
         {
-            enemyStateController.StateMachine.ChangeState(enemyStateController.AttackState);
+            stateMachine.ChangeState(EnemyState.Attack);
         }
     }
 }

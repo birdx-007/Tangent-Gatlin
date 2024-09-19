@@ -10,11 +10,11 @@ public class EnemyAnySO : EnemyStateSOBase
         base.OnUpdateLogic();
         if (!enemy.isAlive)
         {
-            enemyStateController.StateMachine.ChangeState(enemyStateController.DeadState);
+            stateMachine.ChangeState(EnemyState.Dead);
         }
         else if (!enemy.isProvoked)
         {
-            enemyStateController.StateMachine.ChangeState(enemyStateController.IdleState);
+            stateMachine.ChangeState(EnemyState.Idle);
         }
     }
 }

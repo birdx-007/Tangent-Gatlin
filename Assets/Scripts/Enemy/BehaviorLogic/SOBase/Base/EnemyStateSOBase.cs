@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnemyStateSOBase : ScriptableObject
 {
-    protected EnemyStateController enemyStateController;
+    protected EnemyStateMachine stateMachine;
     protected Enemy enemy;
     protected Transform enemyTransform;
     protected static Transform playerTransform;
 
-    public virtual void Initialize(EnemyStateController stateController)
+    public virtual void Initialize(EnemyStateMachine stateController)
     {
-        this.enemyStateController = stateController;
-        this.enemy = stateController.GetComponent<Enemy>();
-        this.enemyTransform = stateController.GetComponent<Transform>();
+        stateMachine = stateController;
+        enemy = stateController.GetComponent<Enemy>();
+        enemyTransform = stateController.GetComponent<Transform>();
         if (!playerTransform)
         {
              playerTransform = enemy.playerTransform;

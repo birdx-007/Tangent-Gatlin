@@ -9,7 +9,7 @@ public class EnemyIdleSOBase : EnemyStateSOBase
         base.OnUpdateLogic();
         if (enemy.isProvoked)
         {
-            enemyStateController.StateMachine.ChangeState(enemyStateController.ChaseState);
+            stateMachine.ChangeState(EnemyState.Chase);
         }
     }
 }

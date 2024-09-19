@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Idle_StayStill",menuName = "EnemyBehaviorLogic/Idle/StayStill")]
 public class EnemyIdle_StayStill : EnemyIdleSOBase
 {
-    public override void Initialize(EnemyStateController es)
+    public override void Initialize(EnemyStateMachine es)
     {
         base.Initialize(es);
     }

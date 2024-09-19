@@ -582,6 +582,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0309b3a38bda74fbe85af17dd639d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyCurrentState: 0
+  startState: 0
+  enemyStateDict:
+    pairs:
+    - key: 0
+      value: {fileID: 11400000, guid: 61b57fedc5db8434cb4d48574fb8d252, type: 2}
+    - key: 1
+      value: {fileID: 11400000, guid: 363b505263b8360478863ab01b87d224, type: 2}
+    - key: 2
+      value: {fileID: 11400000, guid: be5e16c02f8203944b945c0fb78caf88, type: 2}
+    - key: 3
+      value: {fileID: 11400000, guid: ae056bc222979674192960e3e3538d8a, type: 2}
+  enemyAnyStateLogic: {fileID: 11400000, guid: 580f62b7ad9c91249a02ef1312601eb8, type: 2}
   enemyAny: {fileID: 11400000, guid: 580f62b7ad9c91249a02ef1312601eb8, type: 2}
   enemyIdleBase: {fileID: 11400000, guid: 61b57fedc5db8434cb4d48574fb8d252, type: 2}
   enemyChaseBase: {fileID: 11400000, guid: 363b505263b8360478863ab01b87d224, type: 2}

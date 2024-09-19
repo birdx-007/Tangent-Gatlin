@@ -7,7 +7,7 @@ public class EnemyDead_SkyFall : EnemyDeadSOBase
 {
     [SerializeField] private float fallGravity = 8f;
     [SerializeField] private float fallTime = 12f;
-    public override void Initialize(EnemyStateController es)
+    public override void Initialize(EnemyStateMachine es)
     {
         base.Initialize(es);
     }
